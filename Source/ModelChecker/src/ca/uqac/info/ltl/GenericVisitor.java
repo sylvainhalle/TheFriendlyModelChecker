@@ -79,6 +79,22 @@ public class GenericVisitor implements OperatorVisitor
     StringBuffer out = new StringBuffer("F (").append(op).append(")");
     m_pieces.push(out);
   }
+  
+  @Override
+  public void visit(OperatorEF o)
+  {
+    StringBuffer op = m_pieces.pop();
+    StringBuffer out = new StringBuffer("EF (").append(op).append(")");
+    m_pieces.push(out);
+  }
+  
+  @Override
+  public void visit(OperatorAF o)
+  {
+    StringBuffer op = m_pieces.pop();
+    StringBuffer out = new StringBuffer("AF (").append(op).append(")");
+    m_pieces.push(out);
+  }
 
   @Override
   public void visit(OperatorX o)
@@ -95,6 +111,14 @@ public class GenericVisitor implements OperatorVisitor
     StringBuffer out = new StringBuffer("EX (").append(op).append(")");
     m_pieces.push(out);
   }
+  
+  @Override
+  public void visit(OperatorAX o)
+  {
+    StringBuffer op = m_pieces.pop();
+    StringBuffer out = new StringBuffer("AX (").append(op).append(")");
+    m_pieces.push(out);
+  }
 
   @Override
   public void visit(OperatorG o)
@@ -109,6 +133,14 @@ public class GenericVisitor implements OperatorVisitor
   {
     StringBuffer op = m_pieces.pop();
     StringBuffer out = new StringBuffer("EG (").append(op).append(")");
+    m_pieces.push(out);
+  }
+  
+  @Override
+  public void visit(OperatorAG o)
+  {
+    StringBuffer op = m_pieces.pop();
+    StringBuffer out = new StringBuffer("AG (").append(op).append(")");
     m_pieces.push(out);
   }
 
@@ -163,6 +195,15 @@ public class GenericVisitor implements OperatorVisitor
     StringBuffer right = m_pieces.pop();
     StringBuffer left = m_pieces.pop();
     StringBuffer out = new StringBuffer("(").append(left).append(") ").append(OperatorEU.SYMBOL).append(" (").append(right).append(")");
+    m_pieces.push(out);
+  }
+  
+  @Override
+  public void visit(OperatorAU o)
+  {
+    StringBuffer right = m_pieces.pop();
+    StringBuffer left = m_pieces.pop();
+    StringBuffer out = new StringBuffer("(").append(left).append(") ").append(OperatorAU.SYMBOL).append(" (").append(right).append(")");
     m_pieces.push(out);
   }
 

@@ -72,6 +72,18 @@ public interface OperatorVisitor
    * Visits an operator
    * @param o The operator
    */
+  public void visit(OperatorEF o);
+  
+  /**
+   * Visits an operator
+   * @param o The operator
+   */
+  public void visit(OperatorAF o);
+  
+  /**
+   * Visits an operator
+   * @param o The operator
+   */
   public void visit(OperatorX o);
   
   /**
@@ -84,6 +96,12 @@ public interface OperatorVisitor
    * Visits an operator
    * @param o The operator
    */
+  public void visit(OperatorAX o);
+  
+  /**
+   * Visits an operator
+   * @param o The operator
+   */
   public void visit(OperatorG o);
   
   /**
@@ -91,6 +109,12 @@ public interface OperatorVisitor
    * @param o The operator
    */
   public void visit(OperatorEG o);
+  
+  /**
+   * Visits an operator
+   * @param o The operator
+   */
+  public void visit(OperatorAG o);
   
   /**
    * Visits an operator
@@ -127,6 +151,12 @@ public interface OperatorVisitor
    * @param o The operator
    */
   public void visit(OperatorEU o);
+  
+  /**
+   * Visits an operator
+   * @param o The operator
+   */
+  public void visit(OperatorAU o);
   
   /**
    * Visits an operator

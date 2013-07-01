@@ -87,6 +87,24 @@ public class GenericOperatorVisitor implements OperatorVisitor
     out.setOperand(op);
     m_pieces.push(out);
   }
+  
+  @Override
+  public void visit(OperatorEF o)
+  {
+    Operator op  = m_pieces.pop();
+    OperatorEF out = new OperatorEF();
+    out.setOperand(op);
+    m_pieces.push(out);
+  }
+  
+  @Override
+  public void visit(OperatorAF o)
+  {
+    Operator op  = m_pieces.pop();
+    OperatorAF out = new OperatorAF();
+    out.setOperand(op);
+    m_pieces.push(out);
+  }
 
   @Override
   public void visit(OperatorX o)
@@ -105,6 +123,15 @@ public class GenericOperatorVisitor implements OperatorVisitor
     out.setOperand(op);
     m_pieces.push(out);
   }
+  
+  @Override
+  public void visit(OperatorAX o)
+  {
+    Operator op  = m_pieces.pop();
+    OperatorAX out = new OperatorAX();
+    out.setOperand(op);
+    m_pieces.push(out);
+  }
 
   @Override
   public void visit(OperatorG o)
@@ -120,6 +147,15 @@ public class GenericOperatorVisitor implements OperatorVisitor
   {
     Operator op  = m_pieces.pop();
     OperatorEG out = new OperatorEG();
+    out.setOperand(op);
+    m_pieces.push(out);
+  }
+  
+  @Override
+  public void visit(OperatorAG o)
+  {
+    Operator op  = m_pieces.pop();
+    OperatorAG out = new OperatorAG();
     out.setOperand(op);
     m_pieces.push(out);
   }
@@ -185,6 +221,17 @@ public class GenericOperatorVisitor implements OperatorVisitor
     Operator right = m_pieces.pop();
     Operator left = m_pieces.pop();
     OperatorEU out = new OperatorEU();
+    out.setLeft(left);
+    out.setRight(right);
+    m_pieces.push(out);
+  }
+  
+  @Override
+  public void visit(OperatorAU o)
+  {
+    Operator right = m_pieces.pop();
+    Operator left = m_pieces.pop();
+    OperatorAU out = new OperatorAU();
     out.setLeft(left);
     out.setRight(right);
     m_pieces.push(out);

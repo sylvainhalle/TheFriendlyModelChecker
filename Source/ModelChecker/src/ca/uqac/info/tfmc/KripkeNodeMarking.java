@@ -1,6 +1,6 @@
 /*-------------------------------------------------------------------------
     The Friendly Model Checker
-    Copyright (C) 2013  Sylvain Hallé
+    Copyright (C) 2013  Sylvain Hallï¿½
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -33,4 +33,19 @@ public class KripkeNodeMarking extends HashMap<KripkeNode, Set<Operator>>
    */
   private static final long serialVersionUID = 1L;
 
+  public void add(final KripkeNode kn, final Operator o)
+  {
+    Set<Operator> out = null;
+    if (containsKey(kn))
+    {
+      out = get(kn);
+    }
+    else
+    {
+      out = new HashSet<Operator>();
+    }
+    assert out != null;
+    out.add(o);
+    put(kn, out);
+  }
 }

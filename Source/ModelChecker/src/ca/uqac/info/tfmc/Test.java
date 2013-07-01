@@ -1,6 +1,6 @@
 /*-------------------------------------------------------------------------
     The Friendly Model Checker
-    Copyright (C) 2013  Sylvain Hallé
+    Copyright (C) 2013  Sylvain Hallï¿½
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,6 +20,7 @@ package ca.uqac.info.tfmc;
 import java.io.IOException;
 import java.util.*;
 
+import ca.uqac.info.ltl.Operator;
 import ca.uqac.info.util.FileReadWrite;
 
 public class Test
@@ -46,8 +47,20 @@ public class Test
       System.exit(1);      
     }
     
-    // Show stats about Kripke structure
-    ks.getVerticies();
+    // Apply CTL marking and show
+    Operator o = null;
+    try
+    {
+      o = Operator.parseFromString("EX (/p = 0)");
+    }
+    catch (Operator.ParseException e)
+    {
+      System.err.println("ERROR: cannot parse CTL formula");
+    }
+    CtlMarker cm = new CtlMarker(ks);
+    cm.applyMarking(o);
+    KripkeNodeMarking marking = cm.getMarking();
+    System.out.println(marking);
     
     // Format resulting graph to Graphviz
     GraphvizFormatter gf = new GraphvizFormatter();

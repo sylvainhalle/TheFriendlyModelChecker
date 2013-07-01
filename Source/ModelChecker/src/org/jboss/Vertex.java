@@ -21,7 +21,9 @@
 package org.jboss;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * A named graph vertex with optional data.
@@ -407,5 +409,17 @@ public class Vertex<T> {
       return false;
     T o_data = o.getData();
     return data.equals(o_data);
+  }
+  
+  public Set<Vertex<T>> getIncomingVertices()
+  {
+    Set<Vertex<T>> out = new HashSet<Vertex<T>>();
+    List<Edge<T>> edges = getIncomingEdges();
+    for (Edge<T> e : edges)
+    {
+      Vertex<T> v = e.getFrom();
+      out.add(v);
+    }
+    return out;
   }
 }

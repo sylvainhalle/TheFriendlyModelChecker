@@ -158,4 +158,39 @@ public class EmptyVisitor implements OperatorVisitor
     
   }
 
+  @Override
+  public void visit(OperatorAX o)
+  {
+    // TODO Auto-generated method stub
+    
+  }
+
+  @Override
+  public void visit(OperatorAG o)
+  {
+    // TODO Auto-generated method stub
+    
+  }
+
+  @Override
+  public void visit(OperatorAU o)
+  {
+    // TODO Auto-generated method stub
+    
+  }
+
+  @Override
+  public void visit(OperatorEF o)
+  {
+    // TODO Auto-generated method stub
+    
+  }
+
+  @Override
+  public void visit(OperatorAF o)
+  {
+    // TODO Auto-generated method stub
+    
+  }
+
 }

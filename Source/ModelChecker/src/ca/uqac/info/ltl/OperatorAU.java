@@ -1,20 +1,20 @@
 package ca.uqac.info.ltl;
 
-public class OperatorEU extends BinaryOperator
+public class OperatorAU extends BinaryOperator
 {
-    public static final String SYMBOL = "EU";
+    public static final String SYMBOL = "AU";
     
-    public OperatorEU()
+    public OperatorAU()
     {
         super();
-        m_symbol = OperatorEU.SYMBOL;
+        m_symbol = OperatorAU.SYMBOL;
         m_commutes = false;
     }
 
-    public OperatorEU(Operator left, Operator right)
+    public OperatorAU(Operator left, Operator right)
     {
         super(left, right);
-        m_symbol = OperatorEU.SYMBOL;
+        m_symbol = OperatorAU.SYMBOL;
         m_commutes = false;
     }
 

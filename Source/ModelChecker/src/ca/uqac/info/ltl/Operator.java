@@ -91,7 +91,7 @@ public abstract class Operator
   protected static Operator parseFromString(String s, Set<Atom> bound_variables) throws ParseException
   {
     s = s.trim();
-    String c = s.substring(0, 1);
+    String c = s.substring(0, Math.min(2, s.length())).trim();
     Operator out = null;
     if (isQuantifierStart(c))
     {
@@ -131,16 +131,28 @@ public abstract class Operator
     else if (isUnaryOperator(c))
     {
       // Unary operator
-      s = s.substring(1).trim();
+      s = s.substring(2).trim();
       s = trimSurroundingPars(s);
       Operator in = parseFromString(s, bound_variables);
       UnaryOperator uo = null;
       if (c.compareTo("F") == 0)
         uo = new OperatorF();
+      else if (c.compareTo("EF") == 0)
+        uo = new OperatorEF();
+      else if (c.compareTo("AF") == 0)
+        uo = new OperatorAF();
       else if (c.compareTo("X") == 0)
         uo = new OperatorX();
+      else if (c.compareTo("EX") == 0)
+        uo = new OperatorEX();
+      else if (c.compareTo("AX") == 0)
+        uo = new OperatorAX();
       else if (c.compareTo("G") == 0)
         uo = new OperatorG();
+      else if (c.compareTo("AG") == 0)
+        uo = new OperatorAG();
+      else if (c.compareTo("EG") == 0)
+        uo = new OperatorEG();
       else if (c.compareTo(OperatorNot.SYMBOL) == 0)
         uo = new OperatorNot();
       if (uo == null)
@@ -182,7 +194,10 @@ public abstract class Operator
         bo = new OperatorEquiv();
       else if (op.compareTo("U") == 0)
         bo  = new OperatorU();
-
+      else if (op.compareTo("EU") == 0)
+        bo  = new OperatorEU();
+      else if (op.compareTo("AU") == 0)
+        bo  = new OperatorAU();
       if (bo == null)
         throw new ParseException();
       bo.setLeft(o_left);
@@ -250,12 +265,12 @@ public abstract class Operator
 
   private static boolean isUnaryOperator(String c)
   {
-    return c.compareTo("F") == 0 || c.compareTo("G") == 0 || c.compareTo("X") == 0 || c.compareTo(OperatorNot.SYMBOL) == 0;
+    return c.compareTo("AG") == 0 || c.compareTo("AX") == 0 || c.compareTo("AF") == 0 || c.compareTo("EG") == 0 || c.compareTo("EF") == 0 || c.compareTo("EX") == 0 || c.compareTo("F") == 0 || c.compareTo("G") == 0 || c.compareTo("X") == 0 || c.compareTo(OperatorNot.SYMBOL) == 0;
   }
 
   private static boolean containsBinaryOperator(String s)
   {
-    return s.indexOf(OperatorAnd.SYMBOL) != -1 || s.indexOf(OperatorOr.SYMBOL) != -1 || s.indexOf(OperatorXor.SYMBOL) != -1 || s.indexOf(OperatorImplies.SYMBOL) != -1 || s.indexOf(OperatorEquals.SYMBOL) != -1 || s.indexOf(OperatorGreaterThan.SYMBOL) != -1 || s.indexOf(" " + OperatorU.SYMBOL + " ") != -1;
+    return s.indexOf(OperatorAnd.SYMBOL) != -1 || s.indexOf(OperatorOr.SYMBOL) != -1 || s.indexOf(OperatorXor.SYMBOL) != -1 || s.indexOf(OperatorImplies.SYMBOL) != -1 || s.indexOf(OperatorEquals.SYMBOL) != -1 || s.indexOf(OperatorGreaterThan.SYMBOL) != -1 || s.indexOf(" " + OperatorU.SYMBOL + " ") != -1 || s.indexOf(" " + OperatorAU.SYMBOL + " ") != -1 || s.indexOf(" " + OperatorEU.SYMBOL + " ") != -1;
   }
 
   private static String getLeft(String s)
@@ -284,10 +299,11 @@ public abstract class Operator
         if (c.compareTo("(") == 0 || c.compareTo(")") == 0 || 
             c.compareTo(OperatorAnd.SYMBOL) == 0  || c.compareTo(OperatorOr.SYMBOL) == 0 ||
             c.compareTo(OperatorXor.SYMBOL) == 0 || c.compareTo(OperatorGreaterThan.SYMBOL) == 0 ||
-            c.compareTo(OperatorEquals.SYMBOL) == 0 || c.compareTo(OperatorImplies.SYMBOL) == 0)
+            c.compareTo(OperatorEquals.SYMBOL) == 0 || c.compareTo(OperatorEquals.SYMBOL) == 0)
           return s.substring(0, i);
-        if (i < s.length() - 1 && s.substring(i, i+2).compareTo("->") == 0)
-          return s.substring(0, i);
+        if (i < s.length() - 1 && (s.substring(i, i+2).compareTo("->") == 0 ||
+            s.substring(i, i+2).compareTo(OperatorAU.SYMBOL) == 0 || s.substring(i, i+2).compareTo(OperatorEU.SYMBOL) == 0))
+          return s.substring(i + 2);
       }
     }
     return "";
@@ -321,7 +337,8 @@ public abstract class Operator
             c.compareTo(OperatorXor.SYMBOL) == 0 || c.compareTo(OperatorGreaterThan.SYMBOL) == 0 ||
             c.compareTo(OperatorEquals.SYMBOL) == 0 || c.compareTo(OperatorImplies.SYMBOL) == 0)
           return s.substring(i + 1);
-        if (i < s.length() - 1 && s.substring(i, i+2).compareTo("->") == 0)
+        if (i < s.length() - 1 && (s.substring(i, i+2).compareTo("->") == 0 ||
+            s.substring(i, i+2).compareTo(OperatorAU.SYMBOL) == 0 || s.substring(i, i+2).compareTo(OperatorEU.SYMBOL) == 0))
           return s.substring(i + 2);
       }
     }
