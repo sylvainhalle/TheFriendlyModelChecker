@@ -1,0 +1,13 @@
+# ---------------------------------------------------------------------
+# Basic input file for The Friendly Model Checker
+# 
+# The file describes a Kripke structure by explicitly listing the
+# transitions between states and the initial states.
+# Each state is a list of attribute=value pairs enclosed in
+# parentheses.
+# ---------------------------------------------------------------------
+
+INIT (p=0,q=0)
+TRANS (p=0,q=0) -> (p=0,q=1)
+TRANS (p=0,q=1) -> (p=0,q=0)
+TRANS (p=0,q=1) -> (p=0,q=2)
